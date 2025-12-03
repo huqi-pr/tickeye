@@ -17,6 +17,12 @@ RUN apt-get update && apt-get install -y \
 
 # 复制requirements文件并安装Python依赖
 COPY requirements.txt .
+
+# 安装pip并配置清华镜像
+RUN python -m pip install -i https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple --upgrade pip
+RUN pip config set global.index-url https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple
+
+# 安装Python依赖
 RUN pip install --no-cache-dir -r requirements.txt
 
 # 复制应用代码
